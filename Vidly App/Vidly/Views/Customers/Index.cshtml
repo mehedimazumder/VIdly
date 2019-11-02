@@ -13,23 +13,24 @@ else
 {
     <table class="table table-bordered table-hover">
         <thead>
-        <tr>
-            <th>Customer</th>
-            <th>Membership Name</th>
-        </tr>
+            <tr>
+                <th>Customer</th>
+                <th>Membership Name</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach(var customer in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink(customer.Name, "Details", "Customers", 
-                        new { id = customer.Id }, null)
-                </td>
-                <td>@customer.MembershipType.Name</td>
-            </tr>
-        }
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(customer.Name, "Details", "Customers",
+                            new { id = customer.Id }, null)
+                    </td>
+                    <td>@customer.MembershipType.Name</td>
+                </tr>
+            }
         </tbody>
     </table>
 }
+@Html.ActionLink("Create", "New", "Customers", new { Id = 0 }, new { @class = "btn btn-primary" })
 
