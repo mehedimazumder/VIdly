@@ -11,3 +11,5 @@
     <li>Release Date:&nbsp;@Model.ReleaseDate.ToString("yy-MMM-dd ddd")</li>
     <li>Number In Stock:&nbsp;@Model.NumberInStock</li>
 </ul>
+@Html.ActionLink("Edit", "Edit", "Movies", new { Id = Model.Id }, new { @class = "btn btn-primary" })
+
