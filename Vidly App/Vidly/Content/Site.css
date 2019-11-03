@@ -22,3 +22,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+span.field-validation-error {
+    color: red;
+}
+input#Customer_Name.input-validation-error.form-control {
+    border: 2px solid red;
+}
+
+select#Customer_MembershipTypeId.input-validation-error.form-control {
+    border: 2px solid red;
+}
