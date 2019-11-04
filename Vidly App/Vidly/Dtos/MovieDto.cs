@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Web;
 
 namespace Vidly.Dtos
@@ -14,6 +15,7 @@ namespace Vidly.Dtos
         [StringLength(255)]
         public string Name { get; set; }
 
+        public GenreDto Genre { get; set; }
         [Required]
         public byte GenreId { get; set; }
 
