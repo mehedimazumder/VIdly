@@ -6,12 +6,8 @@
 }
 
 <h2>Customers</h2>
-@if (!Model.Any())
-{
-    <p>We don't have any customer yet.</p>
-}
-else
-{
+
+
     <table id ="customers" class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -21,22 +17,10 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(customer.Name, "Details", "Customers",
-                            new { id = customer.Id }, null)
-                    </td>
-                    <td>@customer.MembershipType.Name</td>
-                    <td>
-                        <button class="btn-link js-delete" data-customer-id="@customer.Id">Delete</button>
-                    </td>
-                </tr>
-            }
+          
         </tbody>
     </table>
-}
+
 @Html.ActionLink("Create", "New", "Customers", null, new { @class = "btn btn-primary" })
 
 <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/>
@@ -47,7 +31,29 @@ else
         
         $(document).ready(function () {
 
-            $("#customers").DataTable();
+            $("#customers").DataTable({
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, customer) {
+                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "membershipType.name"
+                    },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
 
             $("#customers").on("click", ".js-delete",
                 function() {
@@ -57,7 +63,7 @@ else
                         function(result) {
                             if (result) {
                                 $.ajax({
-                                    url: "/api/Customers" + "/" + button.attr("#data-customer-id"),
+                                    url: "/api/Customers/" + button.attr("data-customer-id"),
                                     method: "DELETE",
                                     success: function() {
                                         button.parents("tr").remove();
