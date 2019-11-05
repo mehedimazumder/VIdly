@@ -31,6 +31,8 @@ namespace Vidly.Models
         [Range(1, Int32.MaxValue)]
         public byte NumberInStock { get; set; }
 
+        public byte NumberAvailable { get; set; }
+
 
     }
 }
