@@ -1,3 +1,2 @@
-# VIdly
 #Movie Rental Application
 
